@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Login TAPIN</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .login-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-family: 'Georgia', serif;
+        }
+
+        .login-btn {
+            width: 100%;
+            background-color: #4285f4;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background-color: #3367d6;
+        }
+
+        .btn-outline {
+            width: 100%;
+            background-color: white;
+            color: black;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-outline img {
+            height: 18px;
+        }
+
+        .form-label {
+            margin: 0;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .form-group {
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .form-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .login-input,
+        .login-btn,
+        .btn-outline {
+            width: 100%;
+            max-width: 320px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <img src="{{ url_for('static', filename='ptpindad.png') }}" alt="Logo Pindad" class="logo">
+            <h2>Selamat Datang di PT Pindad (Persero)</h2>
+            <p class="tapin-text">TAPIN<br>(Tanya Pindad)</p>
+        </div>
+        <div class="right-panel">
+            <h2 style="margin-bottom: 8px;">LOGIN TAPIN</h2>
+            <p style="font-size: 14px; margin-bottom: 20px;">Tanya seputar produk pertahanan dan keamanan buatan PT Pindad (Persero).</p>
+
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+
+            <form method="post" class="form-wrapper">
+                <div class="form-group">
+                    <input type="text" name="email" class="login-input" placeholder="Masukan Email atau Nomor Undangan"  autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" class="login-input" placeholder="Masukan Password" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            
+                <button class="btn-outline" disabled>
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+                    Continue with Google
+                </button>
+            
+                <button class="btn-outline" disabled>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg">
+                    Continue with Email
+                </button>
+            </form>            
+            </div>
+        </div>
+    </div>
+</body>
+</html>

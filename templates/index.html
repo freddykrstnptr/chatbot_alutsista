@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>TAPIN - Tanya Pindad</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <img src="{{ url_for('static', filename='ptpindad.png') }}" alt="Logo Pindad" class="logo">
+            <h2>Selamat Datang di PT Pindad (Persero)</h2>
+            <p class="tapin-text">TAPIN<br>(Tanya Pindad)</p>
+        </div>
+        <div class="right-panel {% if user_message %}after-question{% endif %}">
+            <h2>TAPIN<br>(Tanya Pindad)</h2>
+
+            {% if not user_message %}
+                <p class="prompt-text">Mau tau seputar PT Pindad?</p>
+            {% endif %}
+
+            {% if user_message %}
+                <div class="chat-box">
+                    <p><strong>Anda:</strong> {{ user_message }}</p>
+                    <p><strong>Tapin:</strong> {{ bot_response }}</p>
+                </div>
+            {% endif %}
+
+            <form method="post" class="chat-form">
+                <input type="text" name="message" placeholder="Ask Pindad" autocomplete="off" required>
+                <button type="submit">↵</button>
+            </form>
+        </div>
+
+        <div class="bottom-right-logout">
+            <form action="{{ url_for('logout') }}" method="get">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

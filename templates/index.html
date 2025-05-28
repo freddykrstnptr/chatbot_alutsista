@@ -28,7 +28,9 @@
 
             <form method="post" class="chat-form">
                 <input type="text" name="message" placeholder="Ask Pindad" autocomplete="off" required>
+                <button type="button" id="micBtn" onclick="startListening()" title="Klik untuk bicara 🎤">🎤</button>
                 <button type="submit">↵</button>
+                <div id="listeningIndicator" style="margin-left: 10px; display: none; font-size: 12px; color: red;">🔴 Mendengarkan...</div>
             </form>
         </div>
 
@@ -38,5 +40,51 @@
             </form>
         </div>
     </div>
+
+<script>
+    const micBtn = document.getElementById('micBtn');
+    const indicator = document.getElementById('listeningIndicator');
+    const inputField = document.getElementById('messageInput');
+
+    function startListening() {
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'id-ID';
+        recognition.interimResults = false;
+
+        // Ubah tampilan saat mulai
+        indicator.style.display = 'inline';
+        micBtn.style.backgroundColor = '#f44336'; // merah
+        micBtn.style.color = 'white';
+
+        recognition.start();
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            inputField.value = transcript;
+
+            // ✅ Suara notifikasi
+            const audio = new Audio('https://actions.google.com/sounds/v1/cartoon/pop.ogg');
+            audio.play();
+
+            // Auto-submit
+            setTimeout(() => {
+                inputField.form.submit();
+            }, 500);
+        };
+
+        recognition.onerror = function(event) {
+            alert('Gagal mengenali suara: ' + event.error);
+        };
+
+        recognition.onend = function() {
+            // Balikin tampilan
+            indicator.style.display = 'none';
+            micBtn.style.backgroundColor = ''; // reset warna
+            micBtn.style.color = '';
+        };
+    }
+</script>
+
+
 </body>
 </html>

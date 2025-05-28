@@ -161,5 +161,21 @@ body {
     background-color: #b71c1c;
 }
 
+.chat-form button#micBtn {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chat-form button#micBtn:hover {
+    background-color: #e0e0e0;
+}
+
+
 
 
